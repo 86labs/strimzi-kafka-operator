@@ -2169,7 +2169,7 @@
         "multi": true,
         "name": "pool_name",
         "options": [],
-        "query": "query_result(kafka_server_replicamanager_leadercount{namespace=\"$kubernetes_namespace\"})",
+        "query": "query_result(kafka_server_raftmetrics_current_leader{namespace=\"$kubernetes_namespace\",strimzi_io_controller_role=\"true\"})",
         "refresh": 1,
         "regex": "/.*strimzi_io_pool_name=\"([^\"]*).*/",
         "skipUrlSync": false,
@@ -2181,7 +2181,7 @@
         "useTags": false
       },
       {
-        "allValue": ".*",
+        "allValue": "${pool_name}-[0-9]+",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
         "definition": "",
@@ -2192,7 +2192,7 @@
         "multi": false,
         "name": "kraft_node",
         "options": [],
-        "query": "query_result(kafka_server_raftmetrics_current_leader{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\"})",
+        "query": "query_result(kafka_server_raftmetrics_current_leader{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",strimzi_io_controller_role=\"true\"})",
         "refresh": 1,
         "regex": "/.*pod_name=\"$strimzi_cluster_name-([^\"]*).*/",
         "skipUrlSync": false,
